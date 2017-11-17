@@ -1,0 +1,164 @@
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% extends "base.html" %}
+{% block body %}
+
+<form >
+	<!-- <h1>hell {% now "jS F Y H:i" %}</h1> -->
+<div class="col-md-6">
+	<p class="pull-right">
+	<span><a class="btn btn-warning" href="{% url 'user_add' %}"><i class="fa fa-plus"></i> New User</a>
+	</span>
+
+		<label>
+			Search:
+			<input type="text" class="input-sm" name="search"  placeholder="Enter Name" 
+			{% if search %} value="{{search| title}}" {%endif%}>
+			<button type="submit">Search</button>
+		</label>
+<!-- 	<input type="radio" name="gender" value="male" checked> Male<br>
+  <input type="radio" name="gender" value="female"> Female<br> -->
+
+	</p>
+</div>
+
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+	<div class="table-responsive">
+		<table id="data_table" class="table table-striped table-bordered" >
+			<thead>
+				<tr>
+					
+					<th>
+						Name
+					</th>
+
+					<th>
+						Email
+					</th>
+
+					<th>
+						Salary
+					</th>	
+
+					<th>
+						TDS
+					</th>	
+
+					<th>
+						Male
+					</th>
+
+					<th>
+						State
+					</th>				
+
+					<!-- <th>
+						Created at
+					</th>
+					<th>
+						Updated at
+					</th> -->
+
+					<th>
+						Terna & Conditions
+					</th>
+				
+					<th>
+						Action
+					</th>	
+
+					
+				</tr>
+			</thead>
+			<tbody>
+				{% for each in usercategory_list %}
+				<tr>
+					<td>
+						{{each.name}}
+					</td>
+
+					<td>
+						{{each.Email}}
+					</td>
+
+					<td>
+						{{each.salary}}
+					</td>
+
+					<td>
+						{{each.tds}}
+					</td>
+
+					<td>
+						{{each.gender}}
+					</td>
+
+					<td>
+						{{each.state}}
+					</td>
+				
+					<!-- <td>
+						{{each.created_at}}
+					</td>
+					<td>
+						{{each.updated_at}}
+					</td> -->
+
+					<td>
+						{{each.status}}
+					</td>
+
+					<td>
+
+						<div class="btn-group" role="group" >
+
+						<a class="btn btn-default btn-sm" href="{% url 'user_edit' each.id %}"><i class="fa fa-edit"></i></a>
+
+						<a class="btn btn-default btn-sm" onclick="if (confirm('Are you sure you want to delete {{each.name}} Record ?')) window.location.href='{% url 'user_delete' each.id %}';"><i class="fa fa-trash"></i></a>
+
+						</div>
+					</td>
+					
+				</tr>
+				{%endfor%}
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>
+
+<p>
+{% if no_of_rows  %}
+{{no_of_rows}} records
+{% else%}
+No Records found
+{%endif%}
+
+</p>
+
+{% if usercategory_list.has_other_pages %}
+  <ul class="pagination">
+    {% if usercategory_list.has_previous %}
+      <li><a href="?page={{ usercategory_list.previous_page_number }}{% if search%}&search={{search}}{%endif%}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in usercategory_list.paginator.page_range %}
+      {% if usercategory_list.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}{% if search%}&search={{search}}{%endif%}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if usercategory_list.has_next %}
+      <li><a href="?page={{ usercategory_list.next_page_number }}{% if search%}&search={{search}}{%endif%}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+
+</form>
+{%endblock%}
