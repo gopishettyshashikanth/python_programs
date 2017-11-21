@@ -13,24 +13,41 @@ from django.db.models import Sum
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from django.db.models import Avg, Max, Min, Sum
+
 def user_list(request,
                       template_name="forms/user_view_detail.html", search=None):
     
-    print request.GET
     no_of_rows = 0
+    total_salary = 0
     if "search" in request.GET:
         search = request.GET.get('search').strip()
         user_list = UserCategory.objects.filter(name__contains=search).order_by('-name')
-        user_list1 = UserCategory.objects.all().annotate(sum('salary'))
-        print user_list1
+        total_salary = UserCategory.objects.filter(name=search).aggregate(Sum('salary'))
         no_of_rows = user_list.count()
     else:
         user_list = UserCategory.objects.all().order_by('-name')
         no_of_rows = user_list.count()
+        total_salary = UserCategory.objects.all().aggregate(Sum('salary'))     
 
-    
+    for i in range(3):
+        
+        max_salary = UserCategory.objects.filter(deptID=i+1).aggregate(Max('salary'))
+        min_salary = UserCategory.objects.filter(deptID=i+1).aggregate(Min('salary'))   
+        print i+1
+        # print max_salary['salary__max']
+        # print min_salary['salary__min']
+        max_salary_list = max_salary['salary__max']
+        min_salary_list = min_salary['salary__min']
+        print max_salary_list
+        print min_salary_list
+
+    # max_salary = UserCategory.objects.filter(deptID=3).aggregate(Max('salary'))
+    # min_salary = UserCategory.objects.filter(deptID=3).aggregate(Min('salary'))   
+    #print max_salary['salary__max']
+
     page = request.GET.get('page', 1)    
-    paginator = Paginator(user_list, 5)
+    paginator = Paginator(user_list, 10)
     
     try:
         usercategory_list = paginator.page(page)
@@ -43,7 +60,10 @@ def user_list(request,
         "page_title": "User Categories",
         "usercategory_list": usercategory_list,
         "search" : search,
-        "no_of_rows": no_of_rows
+        "no_of_rows": no_of_rows,
+        "total_salary" : total_salary['salary__sum'],
+        "max_salary" : max_salary_list,
+        "min_salary" : min_salary_list
     }
     return render(request, 'forms/user_view_detail.html', variables)                           
 
@@ -104,7 +124,7 @@ def user_search(request):
 def index(request):
     user_list = UserCategory.objects.all()
     page = request.GET.get('page', 1)    
-    paginator = Paginator(user_list, 5)
+    paginator = Paginator(user_list, 10)
     
     try:
         usercategory_list = paginator.page(page)
