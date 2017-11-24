@@ -11,7 +11,7 @@ class userForm(forms.ModelForm):
 	gender = forms.ChoiceField(choices=GENDER_CHOICES, widget=forms.RadioSelect())
 	class Meta:
 		model = UserCategory
-		fields = ('name','Email','salary','gender','state','status','deptID')
+		fields = ('name','Email','salary','gender','phone_number','state','status','deptID')
 
 
 

@@ -1,5 +1,7 @@
 from django.db import models
 from django import forms
+from django.core.validators import RegexValidator
+from jsonfield import JSONField
 
 GENDER_CHOICES = (
     ('Male', 'Male'),
@@ -11,7 +13,8 @@ STATE_CHOICES = (
     ('Andhra Pradesh', 'AP'),
     ('Madhra Pradesh', 'MP')
 )
-
+ALLOW_NUMBER_ONLY = RegexValidator(r'^[0-9]*$',
+                                   'Only numeric characters are allowed.')
 class Dept(models.Model):
     deptName = models.CharField(max_length=20)
 
@@ -23,6 +26,9 @@ class UserCategory(models.Model):
     Email = models.CharField(max_length=20)
     salary = models.IntegerField()
     tds = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=10,
+                                     validators=[ALLOW_NUMBER_ONLY],
+                                     unique=True)
     #created_at = models.DateTimeField(auto_now_add=True)
     #updated_at = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=False)

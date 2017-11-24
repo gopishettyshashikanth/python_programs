@@ -8,11 +8,10 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.template import Template, Context, RequestContext
-from django.db.models import Sum
 
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from .models import Dept
 from django.db.models import Avg, Max, Min, Sum
 
 def user_list(request,
@@ -28,42 +27,29 @@ def user_list(request,
     else:
         user_list = UserCategory.objects.all().order_by('-name')
         no_of_rows = user_list.count()
-        total_salary = UserCategory.objects.all().aggregate(Sum('salary'))     
+        total_salary = UserCategory.objects.all().aggregate(Sum('salary'))
 
-    for i in range(3):
-        
-        max_salary = UserCategory.objects.filter(deptID=i+1).aggregate(Max('salary'))
-        min_salary = UserCategory.objects.filter(deptID=i+1).aggregate(Min('salary'))   
-        print i+1
-        # print max_salary['salary__max']
-        # print min_salary['salary__min']
-        max_salary_list = max_salary['salary__max']
-        min_salary_list = min_salary['salary__min']
-        print max_salary_list
-        print min_salary_list
+    dept_table = []
+    for each_dept in Dept.objects.all() :
+        #print each_dept
+        user_list = UserCategory.objects.filter(deptID=each_dept)
+        each_dict = {
+        "name" : each_dept.deptName,
+        "No_of_Emp" : user_list.count(),
+        "min_sal" : user_list.aggregate(Min('salary'))['salary__min'],
+        "max_sal" : user_list.aggregate(Max('salary'))['salary__max'],
+        "sum_sal" : user_list.aggregate(Sum('salary'))['salary__sum']
+        }
+        dept_table.append(each_dict)
 
-    # max_salary = UserCategory.objects.filter(deptID=3).aggregate(Max('salary'))
-    # min_salary = UserCategory.objects.filter(deptID=3).aggregate(Min('salary'))   
-    #print max_salary['salary__max']
-
-    page = request.GET.get('page', 1)    
-    paginator = Paginator(user_list, 10)
-    
-    try:
-        usercategory_list = paginator.page(page)
-    except PageNotAnInteger:
-        usercategory_list = paginator.page(1)
-    except EmptyPage:
-        usercategory_list = paginator.page(paginator.num_pages) 
-    
+    usercategory_list = UserCategory.objects.all()
     variables = {
         "page_title": "User Categories",
         "usercategory_list": usercategory_list,
         "search" : search,
         "no_of_rows": no_of_rows,
         "total_salary" : total_salary['salary__sum'],
-        "max_salary" : max_salary_list,
-        "min_salary" : min_salary_list
+        "dept_table" : dept_table 
     }
     return render(request, 'forms/user_view_detail.html', variables)                           
 
@@ -123,14 +109,3 @@ def user_search(request):
 
 def index(request):
     user_list = UserCategory.objects.all()
-    page = request.GET.get('page', 1)    
-    paginator = Paginator(user_list, 10)
-    
-    try:
-        usercategory_list = paginator.page(page)
-    except PageNotAnInteger:
-        usercategory_list = paginator.page(1)
-    except EmptyPage:
-        usercategory_list = paginator.page(paginator.num_pages) 
-    return render(request, 'forms/user_view_detail.html', { 'usercategory_list': usercategory_list })
-
