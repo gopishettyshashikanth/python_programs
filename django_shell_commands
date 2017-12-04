@@ -1,0 +1,46 @@
+practice 
+http://www.practicepython.org/
+
+python manage.py shell
+from formname.models import className
+ex :- from form.models import UserCategory
+
+
+like example :
+a = UserCategory.objects.filter(name__contains='s')
+
+
+UserCategory.objects.all().count()
+UserCategory.objects.filter(gender='Male').count()
+
+a = UserCategory.objects.filter(name='shashi').filter(salary=1000)
+
+orderby example:--
+a = UserCategory.objects.order_by('name')
+
+
+update:
+
+a = UserCategory.objects.get(id=2)
+a.salary=15000
+a.save()
+a= a.salary
+
+create object:
+from form.models import Dept
+a = Dept.objects.create(deptName='cse')
+
+
+https://docs.djangoproject.com/en/1.11/topics/db/examples/many_to_one/
+
+
+Aggretations
+from django.db.models import Avg, Max, Min, Sum
+
+UserCategory.objects.all().aggregate(Avg('salary'))
+UserCategory.objects.all().aggregate(Max('salary'))
+UserCategory.objects.all().aggregate(Min('salary'))
+UserCategory.objects.all().aggregate(Sum('salary'))
+
+
+UserCategory.objects.filter(deptID=3).aggregate(Max('salary'))

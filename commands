@@ -61,6 +61,9 @@ connect db : \c database name
 database tables : \dt  
 \d table name : describe table 
 
+
+ALTER USER postgres with password ‘new-password’;
+
 comeout from db
 ----------------
 \q
@@ -115,6 +118,10 @@ connect to another system
 -------------------------
 ex:--
 sudo scp -r administrator@202.153.34.163:/etc/init.d/red5 .
+
+sharing my files some other system
+---------------------------------
+python -m SimpleHTTPServer 8005
 
 
 nginx
@@ -176,9 +183,16 @@ need to go that folder and give permission
 user@DIPL-CP-PC008:~/Downloads$ sudo chown postgres:postgres dump.sql
 
 
+text = """<h1>welcome to my app !</h1>"""
+   		return HttpResponse(text)
+
+multiple image upload:
+http://www.easydevmixin.com/2015/07/17/easily-dealing-with-multiple-files-in-django/
 
 
+https://docs.djangoproject.com/en/1.11/topics/http/file-uploads/
 
+excel upload
+http://thepythondjango.com/upload-process-csv-file-django/
 
-
-
+https://simpleisbetterthancomplex.com/tutorial/2016/08/01/how-to-upload-files-with-django.html
