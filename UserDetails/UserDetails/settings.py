@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'form',
+    'postform',
     'services'
 )
 
@@ -53,6 +53,8 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'UserDetails.urls'
+
+#LOGIN_URL = 'index'
 
 TEMPLATES = [
     {
@@ -90,7 +92,6 @@ DATABASES = {
 
 }
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -104,6 +105,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'postform.User'
+
+LOGIN_URL='index'
+
+LOGIN_REDIRECT_URL = "user_list"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
@@ -113,3 +119,5 @@ STATICFILES_DIRS = (
 )
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = '/home/user/shashi/Django/UserDetails/media'
+

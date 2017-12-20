@@ -21,7 +21,7 @@ def upload_csv(request):
             with open('media/documents/'+fileName) as csvDataFile:
                 csvReader = csv.reader(csvDataFile)
                 csvReader.next()
-                
+                                
                 print fileName
                 for row in csvReader:
                     names.append(row[0])

@@ -1,0 +1,44 @@
+{
+"Countries":[
+			{
+            "CountryName":"India",
+			"States":[
+						{
+                        "StateName":"Maharashtra",
+						"Cities":[
+								"Pune",
+								"Nagpur",
+								"Mumbai"
+                                  ]
+                         },
+                         {
+                         "StateName":"Kerala",
+                         "Cities":[
+                         			"Kochi",
+                                    "Munnar"
+                                  ]
+                          }
+                       ]
+             },
+             {
+              "CountryName":"Australia",
+			  "States":[
+						{
+                        "StateName":"Aukland",
+						"Cities":[
+								"GlenField",
+								"Henderson",
+									"MilFord"
+                                  ]
+                         },
+                         {
+                         "StateName":"Melbourne",
+                         "Cities":[
+                         			"Melbourne",
+                                    "South Oakleigh"
+                                  ]
+                          }
+                       ]
+              }
+           ]
+      }

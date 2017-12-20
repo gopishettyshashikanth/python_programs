@@ -1,0 +1,10 @@
+<h1>Form</h1>
+
+<form method="POST" enctype="multipart/form-data" class="post-form">{% csrf_token %}
+    {{ form.as_p }}
+    <!-- <input type="file" name="myfiles" multiple> -->
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+
+ 
+

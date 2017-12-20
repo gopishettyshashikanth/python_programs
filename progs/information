@@ -1,0 +1,30 @@
+USurvey Docunentation Link: https://usurvey.readthedocs.io/en/latest/
+
+Git Link : https://github.com/unicefuganda/uSurvey/tree/dev
+
+git clone -b dev https://github.com/unicefuganda/uSurvey.git
+
+LocalHost : http://localhost:8080
+
+Local Database Link : http://localhost:8009/phppgadmin/
+
+Run Server
+
+python manage.py runserver 0.0.0.0:8000
+
+example prog's link
+http://www.sanfoundry.com/python-problems-solutions/
+http://www.sanfoundry.com/python-program-even-odd-elements-different-lists/
+
+
+
+
+
+
+
+
+
+
+
+
+
