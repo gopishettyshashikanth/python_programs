@@ -1,0 +1,47 @@
+sudo apt-get install mysql-server-5.6
+
+import sql file into local database 
+------------------------------
+source /home/user/Downloads/db/accounts_states.sql
+
+source /home/user/projects/anmol_db_2018_02_08.sql
+
+connect to my sql
+------------------
+mysql -u root -p
+
+connect db:
+------------
+use anmol_django;
+
+show tables;
+show databases;
+Database Name : SELECT DATABASE();
+
+foreign_key_checke_deletion
+---------------------------
+SET FOREIGN_KEY_CHECKS = 0;
+
+ALTER TABLE form_usercategory ALTER COLUMN salary TYPE integer USING (salary::integer);
+
+select statecode, statename, count(*) from accounts_providermaster group by statecode;
+
+Database copy
+CREATE DATABASE newDBName WITH TEMPLATE oldDBName;
+
+local db export
+-------------------
+mysqldump -uroot -p123456aA anmol_django > db.sql
+
+local db import
+-------------------- 
+mysqldump -uroot -p123456aA anmol_django < db.sql
+
+truncate table accounts_servicescountstransactions;
+
+mysql upgrade steps
+-------------------
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install mysql-server-5.6
+

@@ -1,0 +1,196 @@
+know the postgres version
+---------------------------
+SELECT version();
+
+DISABLE Foreign KEY insert data
+---------------------------------
+ALTER TABLE campaign_location DISABLE TRIGGER ALL;
+
+delete from campaign_location where id =57675;
+
+postgres with json
+------------------
+
+http://clarkdave.net/2013/06/what-can-you-do-with-postgresql-and-json/
+
+http://clarkdave.net/2015/03/navigating-null-safety-with-json-and-postgresql/
+
+https://blog.codeship.com/unleash-the-power-of-storing-json-in-postgres/
+
+https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/
+
+https://popsql.io/learn-sql/postgresql/how-to-compare-two-values-when-one-is-null-in-postgresql/
+
+alter column datatype
+
+ALTER TABLE table1 ALTER COLUMN col1 TYPE JSON USING col1::JSON;
+
+ALTER TABLE aisbeneficiary_anmol_women_data ALTER COLUMN womendata TYPE JSONB USING womendata::JSONB;
+
+ALTER TABLE aisbeneficiary_anmol_women_data ALTER COLUMN biodetails TYPE JSONB USING biodetails::JSONB;
+
+SELECT biodetails->>'beneficiary_rchid' AS name FROM aisbeneficiary_anmol_women_data;
+
+SELECT biodetails->>'beneficiary_rchid' AS rchid, biodetails->>'beneficiary_financial_yr' AS year FROM aisbeneficiary_anmol_women_data;
+
+SELECT * FROM aisbeneficiary_anmol_women_data where biodetails->>'beneficiary_financial_yr' = '2016';
+
+SELECT count(*) FROM aisbeneficiary_anmol_women_data where biodetails->>'beneficiary_financial_yr' BETWEEN  '2015' and '2016';
+
+select count(*) from (select distinct anm_id,ais_id,case_no from aisbeneficiary_anmol_women_data) As Result; 
+
+select district_code from aispmaster_provider_master_data group by district_code;
+
+UPDATE questions_question SET name = 'Is the entry to labor room indirect ?' where id = 20;
+
+update locations_locations set name = 'Rajasthan' where id =1;
+
+Truncate with CASCADE and Restart Id
+----------------------------
+truncate table locations_locations RESTART IDENTITY CASCADE;
+
+postgres editor(connect to database:)
+-----------
+sudo su - postgres
+psql
+\l : list od db's
+connect db : \c database name
+database tables : \dt  
+\d table name : describe table 
+
+
+ALTER USER postgres with password ‘new-password’;
+
+comeout from db
+----------------
+\q
+exit
+list of database's : \l
+connect to particular db : \c database name
+\dt :-  database tables
+
+permission to the file
+----------------------------
+sudo chown postgres:postgres rch_10012018.sql
+
+postges import queries:
+-------------------------------
+psql -u username -d databsename -f filename
+
+postgres@DIPL-CP-PC008:~$ psql -U postgres -d cms_dev -f /home/user/projects/cms/sql/dev_dump.sql
+
+or 
+
+psql cms_dev < /home/user/projects/cms/sql/cms_dev.sql
+
+table schema backup
+-----------------
+pg_dump -t table_name database_name > /home/user/Downloads/dump/aispmaster_health_village_data.sql
+
+pg_dump -t aispmaster_health_village_data rch_dashboard > /home/user/Downloads/dump/aispmaster_health_village_data.sql
+
+user@DIPL-CP-PC008:~/Downloads/dump$ sudo chown postgres:postgres aispmaster_health_village_data.sql
+
+
+export
+----------
+
+pg_dump rch_dashboard > /home/user/Downloads/rch_10012018.sql
+
+
+export sql file in server
+--------------------------
+create jhpiegodmapi.sql in one folder
+
+sudo touch filename
+
+give permissin to file
+administrator@biometric:~/Projects/jhpiegodmapi/sql_dump$ sudo chown postgres:postgres jhpiegodmapi.sql
+
+postgres@biometric:/home/administrator/Projects/jhpiegodmapi$ pg_dump jhpiego_dev > /home/administrator/Projects/jhpiegodmapi/sql_dump/jhpego.sql
+
+permissions to the file:
+-----------------------
+need to go that folder and give permission 
+user@DIPL-CP-PC008:~/Downloads$ sudo chown postgres:postgres rch_10012018.sql
+
+give permission to the file : sudo chmod 777 *
+ls -lrt
+
+import csv into postgres
+-------------------------
+http://www.postgresqltutorial.com/import-csv-file-into-posgresql-table/
+
+example:--
+CREATE TABLE persons
+(
+  id serial NOT NULL,
+  first_name character varying(50),
+  last_name character varying(50),
+  dob date,
+  email character varying(255),
+  CONSTRAINT persons_pkey PRIMARY KEY (id)
+)
+
+READ CSV
+COPY persons(first_name,last_name,dob,email) 
+FROM 'C:\tmp\persons.csv' DELIMITER ',' CSV HEADER;
+
+COPY questions_questionform(id,name,form_code,description,created_at,updated_at,updated_by_id)
+FROM '/home/administrator/Projects/jhpiegodmapi/jdmapi/media/questions_csv/QuestionForm.csv' DELIMITER ',' CSV HEADER;
+
+WRITE CSV
+
+\copy (SELECT idproof_number,graduate,idproof_id,location_id, user_id, vehicle_no,assembly_code,booth_code FROM accounts_membership where id>57872) TO /home/user/Desktop/cms_dump/dump.csv CSV DELIMITER ','
+
+distinct multiple columns
+-----------------------------
+select count(*) from (select distinct anm_id,ais_id,rch_id  from aisbeneficiary_anmol_child_data) AS result;
+
+select distinct state_code,district_code,healthblock_code,healthfacilty_code,healthsubfacility_code,village_code from aispmaster_provider_master_data;
+
+select distinct state_code,district_code,healthblock_code,healthfacilty_code,healthsubfacility_code,village_code from aispmaster_provider_master_data where state_code='88';
+
+
+ProviderMaster Data
+
+give permission to the file : sudo chmod 777 *
+ls -lrt
+
+verify the data in provider master	
+select ais_id,village_code,current_status from aisbeneficiary_anmol_women_data;
+
+
+sample
+--------
+
+select * from (select ais_id, rch_id, mobile_id, Village_Code, 
+
+childdata-> 'InfantRegistration'->> 'Village_Code' As Village_Code from aisbeneficiary_anmol_child_data) as b;
+
+create view EC as select ais_id, rch_id, mobile_id,womendata-> 'ECRegistration'->> 'Village_Code' As Village_Code, womendata-> 'ECRegistration'->> 'ASHA_ID' As Asha_Code, womendata-> 'ECRegistration'->> 'HealthSubFacility_Code' As Sub_Center_Code, womendata-> 'ECRegistration'->> 'Name_wife' As Beneficiary_Name, womendata-> 'ECRegistration'->> 'Financial_Yr' As PW_Reg_Fin_Yr, womendata-> 'ECRegistration'->> 'Aadhar_No' As Aadhar, womendata-> 'ECRegistration'->> 'EID' As Enrollment_Number, womendata-> 'ECRegistration'->> 'Male_child_live' As Male_child_live,womendata-> 'ECRegistration'->> 'Female_child_live' As Female_child_live, nullif((womendata->> 'ECTrackingDetails'),'') As Ec_Tracking_Detail,nullif((womendata->> 'PNCTrackingDetails'),'') As Pnc_Tracking_Detail, 
+
+
+IN Operator 
+------------
+SELECT AISID,count(*) FROM ANMOL_WOMAN_STAGING_DATA where AISID IN ('188003934555', '188003933931', '188003933932', '188003933916', '188003933913', '188003933912', '188003934289', '188003934478', '188003934491', '188003934490', '188003934598', '188003934599', '188003934059', '188003934571', '188003934572', '188003934573', '188003934514', '188003934589', '188003934588', '188003934060', '188003934061', '188003934606', '188003934605', '188003934600', '188003934601', '188003934506', '188000881031515051594575') group by AISID;
+
+
+select ais_id, mode from aisbeneficiary_anmol_women_staging_data where  ais_id in ('188003934555', '188003933931', '188003933932', '188003933916', '188003933913', '188003933912', '188003934289', '188003934478', '188003934491', '188003934490', '188003934598', '188003934599', '188003934059', '188003934571', '188003934572', '188003934573', '188003934514', '188003934589', '188003934588', '188003934060', '188003934061', '188003934606', '188003934605', '188003934600', '188003934601', '188003934506', '188000881031515051594575') group by ais_id, mode ;
+
+select financial_yr, count(*) from aisbeneficiary_anmol_women_data group by financial_yr;
+
+
+Testing Locations
+--------------------
+truncate table locations_locations RESTART IDENTITY CASCADE;
+
+select count(*), hierarchy_level_id from locations_locations group by hierarchy_level_id;
+
+select * from locations_locations where _parent_id=1;
+
+select id,name,hierarchy_level_id  from locations_locations where _parent_id=2 and hierarchy_level_id = 3;
+
+select id,name,hierarchy_level_id from locations_locations where _parent_id=350 and hierarchy_level_id = 4;
+
+select id,name,hierarchy_level_id from locations_locations where _parent_id=502 and hierarchy_level_id = 5;

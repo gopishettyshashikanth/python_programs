@@ -1,29 +1,63 @@
-To install pip:
-sudo apt-get install python-pip
+remove .pyc files
+------------------
+find . -name "*.pyc" -exec rm -f {} \;
 
-sudo apt-get install git
-sudo apt-get install vim
+convert float to integer
+---------------------------
+import numpy as np
 
+df['membership_id'][each_user].astype(np.int64)
 
-Command /usr/bin/python -c "import setuptools, tokenize;__file__='/tmp/pip_build_user/tornado/setup.py';exec(compile(getattr(tokenize, 'open', open)(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" install --record /tmp/pip-xJ9WtR-record/install-record.txt --single-version-externally-managed --compile failed with error code 1 in /tmp/pip_build_user/tornado
-Storing debug log for failure in /home/user/.pip/pip.log
+permission to the file
+----------------------------
+sudo chown postgres:postgres rch_10012018.sql
 
-if you get the above error need to execute the below command
+sudo chmod 777 dump.csv
 
-sudo pip install --upgrade pip
+unzip tar file
+----------------
+tar xvzf file.tar.gz
 
-if you want install dependences, write all dependences in one text file and save it(any name) requirements.txt
+run with port in server and check server status
+--------------------------------------------------
+nohup python manage.py runserver 0.0.0.0:8008 &
+tail nohup.out 
+
+Angular
+--------------
+ng serve --host 0.0.0.0 --port 8009 &
+
+sqlite extension
+
+http://sqliteviewer.flowsoft7.com/
+
+description in postgres
+-----------------------
+\d+ accounts_users_groups;
+
+description in sqlite
+---------------------
+pragma table_info('ANMOL_WOMEN_DATA')
+
+http://202.153.34.166:8003/accounts/login/
+
+code = Membership.objects.get(id=1).location.get_ancestors()[3].ec_code
+
+need to get particuler folder what ever you want share folder : python -m SimpleHttpServer 8010
+
+ifconfig : fot system IP Addresses
 
 sudo pip install -r pip-requirements.txt
 
 or 
 
-pip install -U -r pip-requires.txt
+pip install -U -r pip-requirements.txt
 
 
 pip freeze------------>check installed packages
 
 supervisord------>run server
+restart all
 supervisorctl---->check run
 
 eg:http://localhost:8004/call?id=123&peer_id=121------------------>caller
@@ -34,44 +68,14 @@ eg:http://localhost:8004/recieve?id=121&peer_id=123---------------->receive
 webrtc path:
 sudo vim /etc/nginx/nginx.conf
 
-
 python 
 sudo apt-get install python-dev
 
 know the ubuntu version
+-------------------------
 lsb_release -a
 
-
-
-vidmate------------>E: Unable to correct problems, you have held broken packages.
-sudo aptitude install myNewPackage
-If you don't have aptitude on your machine yet, get it with
-
-sudo apt-get install aptitude
-
-
 nano edit-------------->ctrl:w + enter
-
-postgres editor(connect to database:)
------------
-sudo su - postgres
-psql
-\l : list od db's
-connect db : \c database name
-database tables : \dt  
-\d table name : describe table 
-
-
-ALTER USER postgres with password ‘new-password’;
-
-comeout from db
-----------------
-\q
-exit
-list of database's : \l
-connect to particular db : \c database name
-\dt :-  database tables
-
 
 environment creation
 ---------------------
@@ -84,7 +88,8 @@ source /usr/local/bin/virtualenvwrapper.sh
 4. source ~/.bash_profile
 
 5. mkvirtualenv my_env or virtualenv my_env
-6. workon my_env
+6. workon my_env or 
+   source environmentname/bin/activate
 
 got to environment : 
 ------------------
@@ -92,7 +97,6 @@ source vidmedenv/bin/activate
 
 comeout from environment 
 --------------------
-
 deactivate
 
 Django
@@ -104,20 +108,16 @@ python manage.py startapp myapp
 
 pip install Django==1.8.1
 
-connect to mysql
---------------
-mysql -u root -p 
-
-mysql upgrade stepe
--------------------
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install mysql-server-5.6
-
 connect to another system
 -------------------------
 ex:--
 sudo scp -r administrator@202.153.34.163:/etc/init.d/red5 .
+
+remote to local
+-----------------------
+scp -i ssh administrator@192.168.20.26:/home/administrator/Projects/angular_client_jhipego/jhpiego.zip /home/user/shashi
+
+sudo scp -r administrator@192.168.20.26:/home/administrator/Projects/angular_client_jhipego/jhpiego.zip /home/user/shashi
 
 sharing my files some other system
 ---------------------------------
@@ -136,18 +136,6 @@ sudo systemctl start nginx
 sudo systemctl stop nginx 
 sudo systemctl restart nginx
 
-
-local db export
--------------------
-mysqldump -uroot -p123456aA anmol_django > db.sql
-
-local db import
--------------------- 
-mysqldump -uroot -p123456aA anmol_django < db.sql
-
-truncate table accounts_servicescountstransactions;
-
-
 sudo service network-manager restart
 
 ping google.com
@@ -157,30 +145,6 @@ checking port number's running
 ps aux | grep 8000
 
 sudo kill portnumber(8000)
-
-
-python manage.py runserver 8010
-
-
-
-#user_obj = from.save(commit=False)
-#user_obj.pf = (form.c)
-
-
-install requirements.txt
-pip install -r pip-requirements.txt
-
-
-postges import queries:
-
-psql -u username -d databsename -f filename
-
-postgres@DIPL-CP-PC008:~$ psql -U postgres -d cms_aug_29  -f /home/user/Downloads/dump.sql
-
-permissions to the file:
------------------------
-need to go that folder and give permission 
-user@DIPL-CP-PC008:~/Downloads$ sudo chown postgres:postgres dump.sql
 
 
 text = """<h1>welcome to my app !</h1>"""
@@ -193,6 +157,23 @@ http://www.easydevmixin.com/2015/07/17/easily-dealing-with-multiple-files-in-dja
 https://docs.djangoproject.com/en/1.11/topics/http/file-uploads/
 
 excel upload
+
 http://thepythondjango.com/upload-process-csv-file-django/
 
 https://simpleisbetterthancomplex.com/tutorial/2016/08/01/how-to-upload-files-with-django.html
+
+services:
+https://realpython.com/blog/python/django-rest-framework-quick-start/
+
+
+Docker :
+-------------------
+sudo curl -sSL https://get.docker.com/ | sh
+sudo apt-get update && apt-get upgrade
+sudo apt-get install docker.io
+
+sublime installation
+---------------------------
+http://tipsonubuntu.com/2017/05/30/install-sublime-text-3-ubuntu-16-04-official-way/
+
+
