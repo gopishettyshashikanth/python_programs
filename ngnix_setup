@@ -1,0 +1,11 @@
+sudo apt-get install nginx
+
+sudo mkdir /etc/nginx/ssl
+
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+
+create the .conf file in /etc/nginx/sites-enabled
+
+create .conf file
+change listen port number and server name
+

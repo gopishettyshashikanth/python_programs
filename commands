@@ -1,6 +1,38 @@
+python manage.py changepassword username
+
+git clone -b dev https://gitlab.com/dhanushhyderabad/Vidmed/vidmed_pharma.git
+
+compute engine : vm instance
+
+membership_registration_list
+
+remove unicode
+-----------------
+import json,ast
+ast.literal_eval(json.dumps(request.data['drug_info']))
+
+nginx
+---------
+sudo nano /etc/nginx/sites-enabled/filename.conf
+
+Copy
+-------
+cp -r source filename distination file name
+
+
+tail
+----------
+tail -f logs/*log
+
+tail -f logs/*.log
+
 remove .pyc files
 ------------------
 find . -name "*.pyc" -exec rm -f {} \;
+
+kill port number in server
+--------------------------
+sudo fuser -k 8003/tcp
 
 convert float to integer
 ---------------------------
@@ -17,6 +49,16 @@ sudo chmod 777 dump.csv
 unzip tar file
 ----------------
 tar xvzf file.tar.gz
+
+unzip file.zip -d destination_folder
+
+unzip migrations.zip
+
+zip
+---------
+tar -zcvf rmdb20160407.sql.tar.gz rmdb20160407.sql
+
+tar -zcvf eSubcenter.tar.gz eSubcenter
 
 run with port in server and check server status
 --------------------------------------------------
@@ -43,9 +85,9 @@ http://202.153.34.166:8003/accounts/login/
 
 code = Membership.objects.get(id=1).location.get_ancestors()[3].ec_code
 
-need to get particuler folder what ever you want share folder : python -m SimpleHttpServer 8010
+ifconfig : for system IP Addresses
 
-ifconfig : fot system IP Addresses
+pip install --upgrade pip
 
 sudo pip install -r pip-requirements.txt
 
@@ -59,6 +101,7 @@ pip freeze------------>check installed packages
 supervisord------>run server
 restart all
 supervisorctl---->check run
+restart all
 
 eg:http://localhost:8004/call?id=123&peer_id=121------------------>caller
 
@@ -91,6 +134,9 @@ source /usr/local/bin/virtualenvwrapper.sh
 6. workon my_env or 
    source environmentname/bin/activate
 
+workon
+d ~/.virtualenvs/
+
 got to environment : 
 ------------------
 source vidmedenv/bin/activate
@@ -109,23 +155,52 @@ python manage.py startapp myapp
 pip install Django==1.8.1
 
 connect to another system
--------------------------
-ex:--
+--------------------------
+ssh systemname@ipaddresses
+ex : ssh ubuntu@10.10.10.146
+
+ex:--copy
 sudo scp -r administrator@202.153.34.163:/etc/init.d/red5 .
 
-remote to local
+
+git 
+----
+git branch -b branchname
+git checkout branchname
+git merge branch
+
+
+sudo service redis_6379 start
+
+copy remote to local
 -----------------------
 scp -i ssh administrator@192.168.20.26:/home/administrator/Projects/angular_client_jhipego/jhpiego.zip /home/user/shashi
 
 sudo scp -r administrator@192.168.20.26:/home/administrator/Projects/angular_client_jhipego/jhpiego.zip /home/user/shashi
 
+sudo scp -P 2232 -r root@45.114.245.253:/home/projects/aug2018/eSubcenter.tar.gz /home/user/Desktop/esub_sep
+
+copy local to remote
+---------------------
+scp /home/user/Desktop/rbsk/db/db_12072018.sql.zip root@192.168.20.91:/home/administrator
+
+scp -P 2232 /home/user/projects/eSubcenter/media/locations/eSC-20th_Sep_40_New_Locations.xlsx root@45.114.245.253:/home/projects/aug2018/eSubcenter/media/locations
+
+scp /home/user/projects/eSubcenter/survey/migrations.zip root@192.168.20.91:/home/administrator/projects/eSubcenter/survey
+scp /home/user/projects/eSubcenter/survey/migrations.zip root@192.168.20.91:/home/administrator/projects/eSubcenter/survey
+scp /home/user/projects/eSubcenter/survey/migrations.zip root@192.168.20.91:/home/administrator/projects/eSubcenter/survey
+scp /home/user/projects/eSubcenter/survey/migrations.zip root@192.168.20.91:/home/administrator/projects/eSubcenter/survey
+scp /home/user/projects/eSubcenter/survey/migrations.zip root@192.168.20.91:/home/administrator/projects/eSubcenter/survey
+scp /home/user/projects/eSubcenter/survey/migrations.zip root@192.168.20.91:/home/administrator/projects/eSubcenter/survey
+
 sharing my files some other system
----------------------------------
+----------------------------------
 python -m SimpleHTTPServer 8005
 
+python -m SimpleHTTPServer 8002
 
 nginx
--------
+-------------------------
 sudo service nginx start
 sudo service nginx stop
 sudo service nginx restart
@@ -140,11 +215,15 @@ sudo service network-manager restart
 
 ping google.com
 
-checking port number's running
----------------------------------
+checking port number's running(to know server running or not)
+-------------------------------
 ps aux | grep 8000
 
 sudo kill portnumber(8000)
+
+WRITE XLS AND CSV
+-------------------
+https://micropyramid.com/blog/generating-csv-excel-files-using-python/
 
 
 text = """<h1>welcome to my app !</h1>"""
@@ -176,4 +255,21 @@ sublime installation
 ---------------------------
 http://tipsonubuntu.com/2017/05/30/install-sublime-text-3-ubuntu-16-04-official-way/
 
+Multiple Database
+--------------------
+https://docs.djangoproject.com/en/2.0/topics/db/multi-db/
 
+Django Tree Model delete steps
+----------------------------------
+from campaign.models import *
+f= HierarchyLevel.objects.all()
+f
+from django.db.models import QuerySet
+QuerySet.delete(f)
+f= HierarchyLevel.objects.all()
+
+tmux
+------------
+sudo apt-get install tmux
+tmux
+tmux kill-session

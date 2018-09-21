@@ -27,7 +27,7 @@ terms_list={'True':1,'False':2}
 class Command(BaseCommand):
 
     def add_arguments(self, parser):
-        parser.add_argument('no_anms', type=int)
+        parser.add_arguments('no_anms', type=int)
 
     def handle(self, *args, **options):
         no_anms = options.get('no_anms')

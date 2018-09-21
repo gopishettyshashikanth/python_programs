@@ -1,0 +1,37 @@
+Issue 1 : psql: could not connect to server: No such file or directory Is the server running locally and accepting connections on Unix domain socket "/var/run/postgresql/.s.PGSQL.5432"?
+
+
+cd /etc/postgresql/9.4/main/
+
+vim pg_hba.conf 
+
+comment the below code
+#host    all             all             0.0.0.0/0              md5
+
+save and exit
+
+open postgres now. it's working fine.
+
+
+
+Issue 2(USurvey) : AttributeError: 'module' object has no attribute 'OP_NO_TLSv1_1' #83
+
+pip install --upgrade pyopenssl
+
+Usurvey ERROR:
+----------------
+ps -ef | grep supervisord
+You will get some pid of supervisord just like these
+
+root   2503  1  0 Nov19 ?  00:03:23 /usr/bin/python /usr/bin/supervisord
+root   21337 2556  0 18:15 pts/8   00:00:00 grep --color=auto supervisord
+And the PID is 2503
+
+Then type this:
+
+kill -s SIGTERM 2503 
+
+
+
+
+

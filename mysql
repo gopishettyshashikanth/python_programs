@@ -1,6 +1,6 @@
 sudo apt-get install mysql-server-5.6
 
-import sql file into local database 
+import sql file into local database (inside db)
 ------------------------------
 source /home/user/Downloads/db/accounts_states.sql
 
@@ -13,6 +13,16 @@ mysql -u root -p
 connect db:
 ------------
 use anmol_django;
+
+
+COUNTRY	STATE	ZONE	DISTRICT	REVENUE DIVISION	MANDAL	REVENUE VILLAGE	INSTITUTION TYPE	INSTITUTION CODE	INSTITUTION NAME	PINNCODE	AWWNAME	TOTAL CHILDREN	AWC IN CHARGE NAME	MOBILE NUMBER	WARD NO
+
+
+COUNTRY	STATE	ZONE	DISTRICT	REVENUE DIVISION	MANDAL	VILLAGE	INSTITUTION TYPE	INSTITUTION CODE	INSTITUTION NAME	PINNCODE	AWWNAME	TOTAL CHILDREN	AWC IN CHARGE NAME	MOBILE NUMBER	WARD NO
+
+
+
+
 
 show tables;
 show databases;
@@ -29,13 +39,19 @@ select statecode, statename, count(*) from accounts_providermaster group by stat
 Database copy
 CREATE DATABASE newDBName WITH TEMPLATE oldDBName;
 
-local db export
+local db export(outside db)
 -------------------
 mysqldump -uroot -p123456aA anmol_django > db.sql
+
+mysqldump -u root -p anmol_django > db.sql
+
+mysqldump -u root -p rbsk > /home/user/projects/rbsktest/final/db.sql
 
 local db import
 -------------------- 
 mysqldump -uroot -p123456aA anmol_django < db.sql
+
+mysqldump -uroot -p123456aA rbsk < /home/user/Downloads/rbsk_empty.sql
 
 truncate table accounts_servicescountstransactions;
 

@@ -1,0 +1,67 @@
+UPDATE questions_question SET name = 'Number of OBG specialists trained in Dakshata' where id = 11;
+
+UPDATE questions_question SET name = 'Number of Medical Officers trained in Dakshata/ Skills lab' where id = 13;
+
+UPDATE questions_question SET name = 'Number of staff nurses trained in Dakshata/ Skills lab' where id = 15;
+
+UPDATE questions_question SET name = 'Total number of ANMs working in LR' where id = 16;
+
+UPDATE questions_question SET name = 'Total number of LHVs working in LR' where id = 17;
+
+UPDATE questions_question SET name = 'Number of ANMs trained in Dakshata/Skills lab' where id = 18;
+
+UPDATE questions_question SET name = 'Number of LHVs trained in Dakshata/Skills lab' where id = 19;
+
+UPDATE questions_question SET question_code = 'f2_q10' where id = 19;
+
+UPDATE questions_question SET questionform_id = 2 where id = 19;
+
+
+
+
+UPDATE questions_question SET name = 'Does the labor room windows-have curtains of light color or frosted glass?' where id = 21;
+
+UPDATE questions_question SET name = 'Is there a provision for cover by screens or curtains around each labor table?' where id = 22;
+
+UPDATE questions_question SET name = 'Does the labor room have an air-conditioner with adequate tonnage capacity?' where id = 25;
+
+UPDATE questions_question SET name = 'Does the labor room have adequate exhaust for ventilation?' where id = 26;
+
+UPDATE questions_question SET name = 'Does the labor room have adequate power back up?' where id = 28;
+
+UPDATE questions_question SET name = 'Is the radiant warmer in direct access from all labor tables?' where id = 33;
+
+UPDATE questions_question SET name = 'Is there a facility for seating of birth companion at each labor table?' where id = 34;
+
+UPDATE questions_question SET name = 'Does the hand washing station have an elbow operated tap?' where id = 38;
+
+INSERT INTO questions_question (id,name,question_code,questionform_id,updated_by_id) 
+VALUES (111,'Does the radiant warmer has free space on three sides?','f3_q1',3,1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+
+
+

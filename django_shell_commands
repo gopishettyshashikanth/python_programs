@@ -5,6 +5,9 @@ python manage.py shell
 from formname.models import className
 ex :- from form.models import UserCategory
 
+delete
+-----------
+Entry.objects.all().delete()
 
 like example :
 a = UserCategory.objects.filter(name__contains='s')
@@ -28,7 +31,7 @@ a= a.salary
 
 create object:
 from form.models import Dept
-a = Dept.objects.create(deptName='cse')
+a = Dept.objects.create(deptName='cse')a = Dept.objects.create(deptName='cse') 		
 
 
 https://docs.djangoproject.com/en/1.11/topics/db/examples/many_to_one/
@@ -44,3 +47,49 @@ UserCategory.objects.all().aggregate(Sum('salary'))
 
 
 UserCategory.objects.filter(deptID=3).aggregate(Max('salary'))
+
+
+Anmol
+--------
+postgres json database
+
+pip install jsonfield
+
+https://blog.codeship.com/unleash-the-power-of-storing-json-in-postgres/
+
+https://www.compose.com/articles/is-postgresql-your-next-json-database/
+
+http://www.lexev.org/en/2015/trying-json-combo-django-and-postgresql/
+
+from aisbeneficiary.models import *
+
+from aisbeneficiary.models import ANMOL_WOMEN_DATA
+
+d = ANMOL_WOMEN_DATA.objects.values('BioDetails')[0]
+
+d = ANMOL_WOMEN_DATA.objects.filter(BioDetails__contains=['beneficiary_mobile_no'])
+
+d = ANMOL_WOMEN_DATA.objects.values('ANM_ID','BioDetails')[0].values()
+
+select * from aisbeneficiary_anmol_women_data where BioDetails.current_status = 'EC';
+
+PROVIDER_MASTER_DATA.objects.values('anm_id','village_code').distinct().count();
+
+obj = PROVIDER_MASTER_DATA.objects.values('village_code').annotate(total=Count('village_code'))
+
+obj = PROVIDER_MASTER_DATA.objects.filter(state_code=87).distinct().values('district_code')
+
+obj  = PROVIDER_MASTER_DATA.objects.filter(state_code=95).filter(district_code=14).values('healthblock_code').distinct()
+
+custom aommands multiple args
+-------------------------------
+https://reformatcode.com/code/python/multiple-arguments-with-values-to-custom-management-command
+
+python manage.py get_women_data_api --anm_id 18625 --village_code 20442
+
+python manage.py anmol_child_data_insert
+
+
+
+
+

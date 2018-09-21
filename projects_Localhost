@@ -1,0 +1,217 @@
+CMS
+-------
+git clone -b dev https://gitlab.com/dhanushhyderabad/Python/cms.git
+
+remove .pyc files
+------------------
+find . -name "*.pyc" -exec rm -f {} \;
+
+supervisorctl
+
+restart all
+
+remove folder in server
+----------------------
+rm -rf foldername
+
+mkdir logs(logs)
+
+postgres@DIPL-CP-PC008:~$psql -U postgres -d cms_dev -f /home/user/projects/cms/sql/cms_latest_31.sql
+
+http://apps.apbjpdata.org:8009/phpPgAdmin/
+
+UN : root
+pswd : password123 or 123456bB or pass 
+
+python manage.py demo(user database information)
+python manage.py inside_locations(locations)
+
+database:
+http://apps.apbjpdata.org:8009/phpPgAdmin/
+
+
+how to export and import the postgres database in localhost 
+-------------------------------------------------
+export from phppgadmin 
+import into local database
+psql -U username -d databasename -f path
+
+example:--
+postgres@DIPL-CP-PC008:~$psql -U postgres -d cms_aug_29 -f /home/user/Downloads/dump.sql
+
+import sql file : psql foldername < filename.sql
+
+permissions to the file:
+-----------------------
+need to go that folder and give permission 
+user@DIPL-CP-PC008:~/Downloads$ sudo chown postgres:postgres dump.sql
+
+Usurvey
+--------
+
+http://202.153.34.166:8003/
+
+git clone -b dev https://github.com/unicefuganda/uSurvey.git
+
+redis start : sudo service redis_6379 start
+
+superuser: shashi_01
+
+
+http://localhost:8080/home/
+
+http://localhost:8080/accounts/login/?next=/home/
+
+datsbase name : mics
+
+UN : admin
+pswd : admin
+
+local database
+---------------
+
+http://localhost:8009/phppgadmin/
+
+
+webRTC
+--------
+git clone -b dev https://gitlab.com/dhanush_opensource/webrtc_app.git
+
+wbcam checking link online
+https://turncameraon.com/
+
+https://github.com/antsmc2/webrtc_app/
+
+change port number: supervisord.conf 
+
+supervisord - c supervisord.conf
+
+run the webrtc : supervisord
+
+supervisorctl
+
+restart all
+
+sudo service nginx restart
+
+redis start : sudo service redis_6379 start
+
+sudo service redis_6379 start
+
+https://10.10.11.234:80/call?id=121&peer_id=123
+
+https://10.10.11.234:80/recieve?id=123&peer_id=121
+
+https://avs.dhanushinfotech.net/call?id=121&peer_id=123
+
+or 
+
+https://localhost:80/call?id=1245b&peer_id=5421a
+
+https://localhost:80/receive?id=5421a&peer_id=1245b
+
+
+vidmed
+-------
+pharma login
+https://pharma.vidmed.in/admin/login/?next=/admin/Masters/pharmacisttb/
+
+https://pharma.vidmed.in/
+dr12145 / 123456
+dr999999 / 123456
+
+https://localhost:8001/
+
+need to get the username and password
+
+vidmed live link and Username, Password :
+---------------------------------------
+https://pharma.vidmed.in/admin
+admin/admin135$
+
+Doctor 
+-------------
+https://pharma.vidmed.in/index/
+dr30001 / 123456
+
+Anmol
+-------
+http://202.153.37.84/api
+(get the list of all type files)
+
+http://202.153.37.84/media/uploadFiles/1493715668016_JSSK_5.mp4
+
+http://202.153.37.84/media/uploadFiles/1493719040033_19_pnc_mh.wav
+
+git clone -b anmol_2 https://gitlab.com/dhanushhyderabad/SSP.git
+
+Anmol DashBoard
+------------------
+http://anmolapp.com/dashboard
+
+UN : root
+pswd:password123
+
+environment_my_system:anmol_env
+
+bulk upload example:
+python manage.py testdata 1000
+
+
+Anmol RCH DASHBoard
+--------------------
+excel sheel location :
+
+/home/user/projects/anmolrch_dashboard/server/anmolrchdashboard/media/locations/location_masters.xlsx
+
+upload the excel sheet:
+-----------------------
+(anmolrch_env) user@DIPL-CP-PC008:~/projects/anmolrch_dashboard/server/anmolrchdashboard$ python manage.py location_upload
+
+http://127.0.0.1:8005/services/hierarchylevels
+
+services:
+---------
+http://127.0.0.1:8005/services/locations/28/state
+http://127.0.0.1:8005/services/locations/12/state
+http://127.0.0.1:8005/services/locations/12/district
+http://127.0.0.1:8005/services/locations/1/block
+
+COGO
+-----
+
+Link : http://localhost:5080/dhanush/
+
+UN : cogo
+Pswd: 6080
+
+Testing purpose first installed on server(ssh administrator@192.168.20.125)
+
+connect to database
+--------------------
+
+http://localhost:8009/phppgadmin/
+
+How To Install and Use Redis
+----------------------------
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis
+
+
+nginx
+-----
+/etc/nginx/
+
+
+https://pharma.vidmed.in/index/
+doctor login :
+dr10001
+123456
+
+
+http://anmolapp.com/dashboard
+root/password123
+
+run with port in server and check server status
+--------------------------------------------------
+nohup python manage.py runserver 0.0.0.0:8001
+tail nohup.out 

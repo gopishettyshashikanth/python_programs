@@ -1,0 +1,69 @@
+1.WebRTC --- Basic & Advanced
+Basic:
+----------------
+Opensrp(.Net)
+Telemedcine
+
+
+Advanced
+--------------
+Vidmed
+
+
+Cogo
+--------------
+LMS
+
+Installation
+Documetation
+
+uSurvey
+------------------
+
+vidmed code:
+
+git clone -b 103 https://gitlab.com/dhanushhyderabad/Vidmed/vidmed_pharma.git
+
+
+gitlab 
+
+UN :shashikanthg
+
+
+
+chmod related link:
+--------------------
+
+https://www.computerhope.com/unix/uchmod.htm
+
+chmod options permissions filename
+ex : chmod u=rwx,g=rx,o=r myfile
+equal to
+chmod 754 myfile
+
+
+Delete number of lines delete
+------------------------------
+:startingline number, endline number d [enter]
+example:--
+:45,101d[enter]
+
+
+jquery_dropdown
+-------------------
+http://jsfiddle.net/kkk7J/2/
+
+http://www.2my4edge.com/2013/06/choose-state-and-city-based-on-country.html
+
+sample python programs
+------------------------
+https://www.w3resource.com/python-exercises/tuple/
+
+
+custom aommands multiple args
+-------------------------------
+https://reformatcode.com/code/python/multiple-arguments-with-values-to-custom-management-command
+
+python manage.py get_women_data_api --anm_id 18625 --village_code 20442
+
+

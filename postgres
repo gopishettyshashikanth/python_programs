@@ -8,6 +8,29 @@ ALTER TABLE campaign_location DISABLE TRIGGER ALL;
 
 delete from campaign_location where id =57675;
 
+python to postgres connect
+----------------------------------
+https://www.dataquest.io/blog/loading-data-into-postgres/
+
+
+DISABLE FOREIGNKEY
+--------------------
+ALTER TABLE campaign_location DISABLE TRIGGER ALL;
+
+select max(id) from campaign_location;
+
+delete from campaign_location where id < 57675;
+
+ALTER SEQUENCE campaign_location_id_seq RESTART WITH 1;
+
+
+alter SEQUENCE accounts_worker_id_seq RESTART WITH 1;
+
+alter SEQUENCE accounts_doctor_id_seq RESTART WITH 1;
+
+
+ALTER TABLE campaign_location ENABLE TRIGGER ALL;
+
 postgres with json
 ------------------
 
@@ -79,6 +102,8 @@ psql -u username -d databsename -f filename
 
 postgres@DIPL-CP-PC008:~$ psql -U postgres -d cms_dev -f /home/user/projects/cms/sql/dev_dump.sql
 
+psql -U postgres -d cms_dev -f /home/user/Downloads/final_location.sql
+
 or 
 
 psql cms_dev < /home/user/projects/cms/sql/cms_dev.sql
@@ -87,6 +112,8 @@ table schema backup
 -----------------
 pg_dump -t table_name database_name > /home/user/Downloads/dump/aispmaster_health_village_data.sql
 
+psql -U postgres -d esubcenter -f /home/user/projects/eSubcenter/sql/esub_dump_june1.sql
+
 pg_dump -t aispmaster_health_village_data rch_dashboard > /home/user/Downloads/dump/aispmaster_health_village_data.sql
 
 user@DIPL-CP-PC008:~/Downloads/dump$ sudo chown postgres:postgres aispmaster_health_village_data.sql
@@ -94,8 +121,15 @@ user@DIPL-CP-PC008:~/Downloads/dump$ sudo chown postgres:postgres aispmaster_hea
 
 export
 ----------
-
 pg_dump rch_dashboard > /home/user/Downloads/rch_10012018.sql
+
+touch 07052018_dump.sql
+
+sudo chown postgres:postgres 07052018_dump.sql
+
+sudo chmod 777 db_dump_31052018
+
+ls -lrt
 
 
 export sql file in server
@@ -194,3 +228,20 @@ select id,name,hierarchy_level_id  from locations_locations where _parent_id=2 a
 select id,name,hierarchy_level_id from locations_locations where _parent_id=350 and hierarchy_level_id = 4;
 
 select id,name,hierarchy_level_id from locations_locations where _parent_id=502 and hierarchy_level_id = 5;
+
+remove postgres
+--------------------
+sudo apt-get autoremove --purge postgresql-9.5 
+
+install postgres
+-------------------
+sudo apt-get update
+sudo apt-get install postgresql postgresql-contrib
+
+postgres10
+------------------
+https://websiteforstudents.com/installing-postgresql-10-on-ubuntu-16-04-17-10-18-04/
+
+https://tecadmin.net/install-postgresql-server-on-ubuntu/
+
+sudo apt-get install libssl1.0.0
