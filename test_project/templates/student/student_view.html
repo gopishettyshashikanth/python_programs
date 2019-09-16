@@ -1,0 +1,89 @@
+{% extends "rest_framework/base.html" %}
+{% block pagetitle %}
+{{page_title}}
+{% endblock %}
+{% block body %}
+<div class="row">
+<div class="col-md-6">
+	<p class="page_title"><i class="fa fa-bullhorn"></i> {{page_title}}</p>
+</div>
+<div class="col-md-6">
+	<p class="pull-right">
+	<span><a class="btn btn-warning" href="{% url 'student_add' %}"><i class="fa fa-plus"></i> New Campaign</a>
+	</span>
+	<span><a class="btn btn-default" href="{{cancel_url}}"><i class="fa fa-close"></i> Close</a>
+	</span>
+	</p>
+	</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+<form  method="POST" enctype="multipart/form-data" class="fill-up" action="{% if student %}{% url 'campaign_edit' student.id %}{%else%}{% url 'student_add' %}{%endif%}">{% csrf_token %}
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-2">
+				<label>Name</label>
+			</div>
+			<div class="col-md-6">
+				{{student.name}}				
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-2">
+				<label>Description</label>
+			</div>
+			<div class="col-md-6">
+				{{student.gender}}				
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-2">
+				<label>is active</label>
+			</div>
+			<div class="col-md-6">
+				{{student.dob}}
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-2">
+				<label>Created at</label>
+			</div>
+			<div class="col-md-6">
+				{{campaign.created_at}}
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-2">
+				<label>Updated On</label>
+			</div>
+			<div class="col-md-6">
+				{{campaign.updated_at}}
+			</div>
+		</div>
+	</div>
+	
+	</div>
+
+</form>
+	
+</div>
+</div>
+
+
+{%endblock%}
+
+{% block extracss %}
+
+{%endblock%}
+
+{% block extrajs %}
+
+{%endblock%}
